@@ -66,36 +66,42 @@
     </p>
   </div>
 
-   <!-- this is my API example needed per the finals requirements-->
+  <!-- this is my API and javascript example needed per the finals requirements-->
     <section class="api-section">
       <h2>Daily Quote</h2>
-      <p id="quote">Loading...</p>
-      <button onclick="getQuote()">Get New Quote</button>
+     <p id="quote-element">Loading...</p>
+<p id="author-element"></p>
+
+<button id="new-quote-btn">Get New Quote</button>
     </section>
 
-  </main>
-
-  <!-- this is the javascript i need per the finals requirements-->
   <script>
-   fetch('https://zenquotes.io/api/random')
+function getQuote() {
+  fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://zenquotes.io/api/random"))
     .then(response => response.json())
     .then(data => {
-        // data is a JSON array, the first element (data[0]) contains the quote
-        const quoteText = data[0].q; // The quote text
-        const quoteAuthor = data[0].a; // The author's name
+      const parsedData = JSON.parse(data.contents);
+      const quoteText = parsedData[0].q;
+      const quoteAuthor = parsedData[0].a;
 
-        // Example of how to display the quote in HTML elements
-        document.getElementById('quote-element').innerHTML = quoteText;
-        document.getElementById('author-element').innerHTML = "- " + quoteAuthor;
+      document.getElementById("quote-element").textContent = quoteText;
+      document.getElementById("author-element").textContent = "- " + quoteAuthor;
     })
     .catch(error => {
-        console.error('Failed to fetch Zen quote:', error);
+      console.error("Failed to fetch Zen quote:", error);
+      document.getElementById("quote-element").textContent = "Failed to load quote.";
     });
+}
 
+// load one quote when the page opens
+document.addEventListener("DOMContentLoaded", function () {
+  getQuote();
 
-getQuote();
-
-  </script>
+  document
+    .getElementById("new-quote-btn")
+    .addEventListener("click", getQuote);
+});
+</script>
 
 
 </body>
