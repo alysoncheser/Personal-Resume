@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alyson Cheser | Web Design and Technologies</title>
+  <!--Web Design and Technologies-->
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- for my navagation bar -->
+  <header class="navbar">
+    <div class="logo">
+  <span class="square"></span>
+  <img src="images/icon.gif" alt="Icon" class="logo-gif">
+  <h1>Alyson Cheser <span>/ IT Professional</span></h1>
+</div>
+
+    <nav>
+      <a href="about.html">About Me</a>
+      <a href="resume.html">Resume</a>
+      <a href="projects.html">Projects</a>
+      <a href="skillset.html">Skillset</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+<main class="hero">
+
+  <!-- my picture and linkedIn -->
+  <div class="profile-card">
+    <img src="images/profile.jpg" alt="Profile photo">
+    <h2>Alyson<br>Cheser</h2>
+    <div class="line"></div>
+    <p>IT PROFESSIONAL</p>
+
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/alyson-cheser-0980a729a/" target="_blank">
+        LinkedIn
+      </a>
+    </div>
+  </div> 
+
+  <!-- text i have for my home page -->
+  <div class="hero-text">
+    <h1>Hello!</h1>
+    <h3>Welcome to my portfolio</h3>
+
+    <div class="buttons">
+      <a href="resume.html" class="btn primary">Resume</a>
+      <a href="projects.html" class="btn outline">Projects</a>
+    </div>
+
+    <p>
+      I am an Information Technology graduate completing my degree this year,
+      CompTIA A+ certified, with two years of hands-on IT experience providing
+      technical support and troubleshooting hardware and software issues.
+    </p>
+
+    <p>
+      I am passionate about technology, problem-solving, and continuous learning,
+      and I am eager to grow within a professional IT environment.
+    </p>
+  </div>
+
+   <!-- this is my API example needed per the finals requirements-->
+    <section class="api-section">
+      <h2>Daily Quote</h2>
+      <p id="quote">Loading...</p>
+      <button onclick="getQuote()">Get New Quote</button>
+    </section>
+
+  </main>
+
+  <!-- this is the javascript i need per the finals requirements-->
+  <script>
+   fetch('https://zenquotes.io/api/random')
+    .then(response => response.json())
+    .then(data => {
+        // data is a JSON array, the first element (data[0]) contains the quote
+        const quoteText = data[0].q; // The quote text
+        const quoteAuthor = data[0].a; // The author's name
+
+        // Example of how to display the quote in HTML elements
+        document.getElementById('quote-element').innerHTML = quoteText;
+        document.getElementById('author-element').innerHTML = "- " + quoteAuthor;
+    })
+    .catch(error => {
+        console.error('Failed to fetch Zen quote:', error);
+    });
+
+
+getQuote();
+
+  </script>
+
+
+</body>
+</html>
+
